@@ -99,7 +99,9 @@ function CartItem() {
   const dispatch = useDispatch();
   const items       = useSelector(selectCartItems);
   const totalQty    = useSelector(selectCartTotalQuantity);
-  const totalCost   = useSelector(selectCartTotalCost);
+  const totalCartAmount = items.reduce(
+  (total, item) => total + item.cost * item.quantity, 0
+);
 
   const [showToast, setShowToast] = useState(false);
 
@@ -188,7 +190,7 @@ function CartItem() {
 
               <div className="summary-row total">
                 <span>Total</span>
-                <span>₹{grandTotal}</span>
+                <span>₹{totalCartAmount}</span>
               </div>
 
               <div className="cart-actions">
